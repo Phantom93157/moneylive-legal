@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delete Your MoneyLive Account</title>
+<meta name="description" content="Permanently delete your MoneyLive account and data from the web, without needing the app installed.">
+<link rel="canonical" href="https://moneylive-legal.pages.dev/delete-account/">
+<meta name="theme-color" content="#0e9f6e">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e9f6e'/%3E%3Cpath d='M6 18h4l3-9 5 16 3-11 2 4h5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script>(function(){try{var s=localStorage.getItem('ml-lang');var l=s||(navigator.language||'en').slice(0,2);document.documentElement.lang=(l==='de')?'de':'en';}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip-link" href="#main"><span data-lang="en">Skip to content</span><span data-lang="de">Zum Inhalt springen</span></a>
+
+<nav class="site-nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h4l2-7 4 14 2-9 2 2h4"/></svg></span>
+      MoneyLive
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+    <div class="nav-links">
+      <a href="/#product"><span data-lang="en">Product</span><span data-lang="de">Produkt</span></a>
+      <a href="/features/"><span data-lang="en">Features</span><span data-lang="de">Funktionen</span></a>
+      <a href="/#learning"><span data-lang="en">Learn</span><span data-lang="de">Lernen</span></a>
+      <a href="/about/"><span data-lang="en">About</span><span data-lang="de">Über uns</span></a>
+    </div>
+    <div class="nav-right">
+      <a class="btn btn-primary btn-sm" href="/#download"><span data-lang="en">Download</span><span data-lang="de">Herunterladen</span></a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+  <header class="legal-hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span><span data-lang="en">Legal</span><span data-lang="de">Rechtliches</span></div>
+      <h1><span data-lang="en">Delete Your Account</span><span data-lang="de">Konto löschen</span></h1>
+      <p class="legal-updated" style="max-width:60ch;">
+        <span data-lang="en">This page works without the app installed and without an existing session — it verifies you directly, then triggers the same real, server-side deletion the app itself uses.</span>
+        <span data-lang="de">Diese Seite funktioniert ohne installierte App und ohne bestehende Sitzung — sie verifiziert dich direkt und löst dieselbe echte, serverseitige Löschung aus, die auch die App selbst nutzt.</span>
+      </p>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap" style="max-width:720px;padding:56px 24px 100px;">
+
+      <!-- How it works -->
+      <div class="delete-panel reveal">
+        <h2 style="font-size:19px;margin-bottom:18px;"><span data-lang="en">How this works</span><span data-lang="de">So funktioniert es</span></h2>
+        <ol class="delete-steps">
+          <li class="done">
+            <span class="step-num">1</span>
+            <div><h4 data-lang="en">Verify it's you</h4><h4 data-lang="de">Identität bestätigen</h4>
+            <p data-lang="en">Sign in below with your MoneyLive email and password — the same credentials you use in the app. This page never sees or stores your password; it's sent straight to Supabase (our auth provider) to obtain a one-time session token.</p>
+            <p data-lang="de">Melde dich unten mit deiner MoneyLive-E-Mail und deinem Passwort an — denselben Zugangsdaten wie in der App. Diese Seite sieht oder speichert dein Passwort nicht; es wird direkt an Supabase (unseren Auth-Anbieter) gesendet, um ein einmaliges Sitzungs-Token zu erhalten.</p></div>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <div><h4 data-lang="en">Confirm deletion</h4><h4 data-lang="de">Löschung bestätigen</h4>
+            <p data-lang="en">You'll be asked to explicitly confirm — this cannot be undone.</p>
+            <p data-lang="de">Du wirst gebeten, ausdrücklich zu bestätigen — dies kann nicht rückgängig gemacht werden.</p></div>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <div><h4 data-lang="en">Server-side deletion</h4><h4 data-lang="de">Serverseitige Löschung</h4>
+            <p data-lang="en">Your session token is sent to our account-deletion service, which verifies it directly with Supabase and then permanently deletes your <code class="mono">auth.users</code> record. Your profile and leaderboard entry are removed automatically as a consequence (database cascade) — no separate step, nothing left behind.</p>
+            <p data-lang="de">Dein Sitzungs-Token wird an unseren Konto-Löschdienst gesendet, der es direkt bei Supabase verifiziert und anschließend deinen <code class="mono">auth.users</code>-Datensatz dauerhaft löscht. Dein Profil und dein Bestenlisten-Eintrag werden dadurch automatisch entfernt (Datenbank-Kaskade) — kein separater Schritt, nichts bleibt zurück.</p></div>
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            <div><h4 data-lang="en">Done</h4><h4 data-lang="de">Fertig</h4>
+            <p data-lang="en">You'll see a confirmation on this page. Your login no longer works, anywhere.</p>
+            <p data-lang="de">Du siehst eine Bestätigung auf dieser Seite. Deine Zugangsdaten funktionieren danach nirgendwo mehr.</p></div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Live form / configuration-gated -->
+      <div class="delete-panel reveal" data-delay="1" id="deleteFormPanel">
+        <h2 style="font-size:19px;margin-bottom:6px;"><span data-lang="en">Request deletion</span><span data-lang="de">Löschung anfragen</span></h2>
+
+        <div id="notConfigured">
+          <p class="notice-line" style="margin-top:14px;max-width:none;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4 2 20h20L12 4Z" stroke-linejoin="round"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>
+            <span data-lang="en"><span class="status-pill status-todo">Needs backend configuration</span> The account-deletion service (a Cloudflare Worker — code already in the repo at <code class="mono">server/account-delete</code>) has not been deployed with a public URL configured on this page yet. The self-service form below is disabled until that URL is set — see <code class="mono">assets/js/delete-account.js</code>. This is not faked as working.</span>
+            <span data-lang="de"><span class="status-pill status-todo">Backend-Konfiguration ausstehend</span> Der Konto-Löschdienst (ein Cloudflare Worker — Code bereits im Repository unter <code class="mono">server/account-delete</code>) wurde noch nicht mit einer auf dieser Seite hinterlegten öffentlichen URL bereitgestellt. Das Selbstbedienungsformular unten ist deaktiviert, bis diese URL gesetzt ist — siehe <code class="mono">assets/js/delete-account.js</code>. Dies wird nicht fälschlich als funktionsfähig dargestellt.</span>
+          </p>
+        </div>
+
+        <form id="deleteForm" novalidate>
+          <div class="form-field">
+            <label for="dlEmail">Email</label>
+            <input type="email" id="dlEmail" name="email" autocomplete="username" required>
+          </div>
+          <div class="form-field">
+            <label for="dlPassword"><span data-lang="en">Password</span><span data-lang="de">Passwort</span></label>
+            <input type="password" id="dlPassword" name="password" autocomplete="current-password" required>
+          </div>
+          <label style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--text-muted);margin:4px 0 18px;">
+            <input type="checkbox" id="dlConfirm" required style="margin-top:3px;">
+            <span data-lang="en">I understand this permanently deletes my MoneyLive account and all associated server-side data, and cannot be undone.</span>
+            <span data-lang="de">Mir ist bewusst, dass dies mein MoneyLive-Konto und alle zugehörigen serverseitigen Daten dauerhaft löscht und nicht rückgängig gemacht werden kann.</span>
+          </label>
+          <button type="submit" class="btn btn-primary" id="dlSubmit" style="width:100%;background:var(--danger);">
+            <span data-lang="en">Permanently delete my account</span><span data-lang="de">Mein Konto dauerhaft löschen</span>
+          </button>
+          <div class="form-msg" id="dlMsg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <!-- Fallback -->
+      <div class="callout reveal" data-delay="2">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <p>
+          <strong data-lang="en">Prefer email?</strong><strong data-lang="de">Lieber per E-Mail?</strong>
+          <span data-lang="en">You can always request deletion by emailing <a class="inline-link" href="mailto:khodrtalal@gmail.com?subject=Delete%20my%20MoneyLive%20account">khodrtalal@gmail.com</a> from the address on your account. We'll verify it's you and delete the account manually, normally within a few days.</span>
+          <span data-lang="de">Du kannst die Löschung jederzeit per E-Mail an <a class="inline-link" href="mailto:khodrtalal@gmail.com?subject=MoneyLive%20Konto%20l%C3%B6schen">khodrtalal@gmail.com</a> von der mit deinem Konto verknüpften Adresse anfragen. Wir verifizieren dich und löschen das Konto manuell, in der Regel innerhalb weniger Tage.</span>
+        </p>
+      </div>
+
+      <!-- What gets deleted -->
+      <div class="reveal" data-delay="3" style="margin-top:36px;">
+        <h2 style="font-size:19px;margin-bottom:14px;"><span data-lang="en">What this deletes — and what it doesn't</span><span data-lang="de">Was gelöscht wird — und was nicht</span></h2>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th><span data-lang="en">Data</span><span data-lang="de">Daten</span></th><th><span data-lang="en">Result</span><span data-lang="de">Ergebnis</span></th></tr></thead>
+            <tbody>
+              <tr><td><span data-lang="en">Login (email + password)</span><span data-lang="de">Login (E-Mail + Passwort)</span></td><td><span data-lang="en">Permanently deleted</span><span data-lang="de">Dauerhaft gelöscht</span></td></tr>
+              <tr><td><span data-lang="en">Profile (username, display name, avatar)</span><span data-lang="de">Profil (Benutzername, Anzeigename, Avatar)</span></td><td><span data-lang="en">Permanently deleted (cascade)</span><span data-lang="de">Dauerhaft gelöscht (Kaskade)</span></td></tr>
+              <tr><td><span data-lang="en">Leaderboard entry</span><span data-lang="de">Bestenlisten-Eintrag</span></td><td><span data-lang="en">Permanently deleted (cascade)</span><span data-lang="de">Dauerhaft gelöscht (Kaskade)</span></td></tr>
+              <tr><td><span data-lang="en">Local paper-trading portfolio &amp; history on your phone</span><span data-lang="de">Lokales Paper-Trading-Portfolio &amp; Verlauf auf deinem Handy</span></td><td><span data-lang="en">Not touched by this page — it never leaves your device. Uninstall the app, or clear its storage, to remove it too.</span><span data-lang="de">Von dieser Seite nicht betroffen — verlässt nie dein Gerät. Deinstalliere die App oder lösche ihren Speicher, um es ebenfalls zu entfernen.</span></td></tr>
+              <tr><td><span data-lang="en">Infrastructure logs (Supabase / Cloudflare)</span><span data-lang="de">Infrastruktur-Logs (Supabase / Cloudflare)</span></td><td><span class="status-pill status-verify">Needs verification</span> <span data-lang="en">follows those providers' own standard log-retention windows</span><span data-lang="de">folgt den jeweiligen Standard-Aufbewahrungsfristen dieser Anbieter</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <span class="brand-mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h4l2-7 4 14 2-9 2 2h4"/></svg></span>
+          MoneyLive
+        </a>
+        <p><span data-lang="en">Markets, paper trading, and currency conversion — built on real data, presented honestly.</span><span data-lang="de">Märkte, Paper Trading und Währungsumrechnung — auf echten Daten aufgebaut, ehrlich dargestellt.</span></p>
+      </div>
+      <div class="footer-col">
+        <h5 data-lang="en">Product</h5><h5 data-lang="de">Produkt</h5>
+        <ul>
+          <li><a href="/features/"><span data-lang="en">Features</span><span data-lang="de">Funktionen</span></a></li>
+          <li><a href="/#learning"><span data-lang="en">Learn</span><span data-lang="de">Lernen</span></a></li>
+          <li><a href="/about/"><span data-lang="en">About</span><span data-lang="de">Über uns</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-lang="en">Legal</h5><h5 data-lang="de">Rechtliches</h5>
+        <ul>
+          <li><a href="/privacy/"><span data-lang="en">Privacy Policy</span><span data-lang="de">Datenschutz</span></a></li>
+          <li><a href="/terms/"><span data-lang="en">Terms</span><span data-lang="de">Nutzungsbedingungen</span></a></li>
+          <li><a href="/imprint/"><span data-lang="en">Imprint</span><span data-lang="de">Impressum</span></a></li>
+          <li><a href="/delete-account/"><span data-lang="en">Delete Account</span><span data-lang="de">Konto löschen</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-lang="en">Contact</h5><h5 data-lang="de">Kontakt</h5>
+        <ul><li><a href="mailto:khodrtalal@gmail.com">khodrtalal@gmail.com</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> MoneyLive · Talal Khodr</span>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="de">DE</button>
+        <button type="button" data-lang-btn="en">EN</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/delete-account.js"></script>
+<script>
+(function(){
+  var KEY='ml-lang';
+  function apply(l){ document.documentElement.lang=l; document.querySelectorAll('[data-lang-btn]').forEach(function(b){b.classList.toggle('active', b.getAttribute('data-lang-btn')===l);}); try{localStorage.setItem(KEY,l);}catch(e){} }
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b){ b.addEventListener('click', function(){ apply(b.getAttribute('data-lang-btn')); }); });
+  apply(document.documentElement.lang || 'en');
+})();
+</script>
+</body>
+</html>
