@@ -118,15 +118,15 @@
             showMsg('error', 'Too many attempts — please try again in a minute.', 'Zu viele Versuche — bitte versuche es in einer Minute erneut.');
           } else {
             showMsg('error',
-              'Deletion failed. Please try again, or email khodrtalal@gmail.com.',
-              'Löschung fehlgeschlagen. Bitte versuche es erneut oder schreibe an khodrtalal@gmail.com.');
+              'Deletion failed. Please try again, or email moneylivesupport@gmail.com.',
+              'Löschung fehlgeschlagen. Bitte versuche es erneut oder schreibe an moneylivesupport@gmail.com.');
           }
         })
         .catch(function () {
           setBusy(false);
           showMsg('error',
-            'Network error. Please try again, or email khodrtalal@gmail.com.',
-            'Netzwerkfehler. Bitte versuche es erneut oder schreibe an khodrtalal@gmail.com.');
+            'Network error. Please try again, or email moneylivesupport@gmail.com.',
+            'Netzwerkfehler. Bitte versuche es erneut oder schreibe an moneylivesupport@gmail.com.');
         });
     });
   });
