@@ -397,21 +397,61 @@ section { padding: 108px 0; position: relative; }
 .pillar p { font-size: 14.5px; }
 .pillar.pillar-lg { grid-column: span 1; }
 
-/* ---------- Showcase gallery ---------- */
-.showcase-strip { display: flex; gap: 26px; overflow-x: auto; padding: 14px 4px 30px; scroll-snap-type: x proximity; }
-.showcase-strip::-webkit-scrollbar { height: 8px; }
-.showcase-strip::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
-.showcase-item { scroll-snap-align: start; flex: none; width: 220px; }
-.showcase-item .phone-frame { --pw: 220px; transition: transform 0.3s var(--ease); }
-/* "MoneyLive in action" showcase (Sept 2026): real screenshots, dezente
-   Hover-Bewegung nur auf Geräten mit Maus/Trackpad (hover:hover), damit auf
-   Touch nichts "hängen" bleibt; prefers-reduced-motion deaktiviert sie ganz. */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .showcase-item:hover .phone-frame { transform: translateY(-6px); }
+/* ---------- Showcase: product presentation, not a gallery ---------- */
+/* Product-showcase pass (Sept 2026): one large featured phone (Markets)
+   beside a 2x2 grid of supporting screens — a real visual hierarchy
+   instead of five identically-sized tiles in a scrolling row. The old
+   row's fixed-width flex items (220px x5 + gaps > available width) were
+   exactly why the last one (MIA) needed a manual scroll to see in full;
+   a grid can only wrap, never silently truncate like that. */
+.showcase-pro { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: start; }
+.showcase-feature { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.showcase-feature-frame { --pw: min(300px, 60vw); }
+.showcase-support-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
+.showcase-support-item { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.showcase-support-item .phone-frame { --pw: min(180px, 40vw); }
+@media (max-width: 860px) {
+  .showcase-pro { grid-template-columns: 1fr; gap: 40px; }
 }
-.showcase-item .showcase-caption { text-align: center; margin-top: 14px; font-size: 13.5px; color: var(--text-muted); display: grid; gap: 4px; }
-.showcase-item .showcase-caption strong { font-family: var(--font-display); font-size: 14.5px; font-weight: 700; color: var(--text); }
-.showcase-item:nth-child(even) { margin-top: 34px; }
+/* Mobile (per the same "product presentation" pass): the 2x2 support grid
+   would force four screenshots down to a width where their real UI text
+   stops being legible — becomes a single-row, one-at-a-time horizontal
+   carousel instead, matching how the feature screenshot above it is also
+   full-width-ish and centered. scroll-snap keeps one card centered per
+   swipe; nothing here fires unless the user actually drags/swipes. */
+@media (max-width: 640px) {
+  .showcase-support-grid {
+    display: flex; grid-template-columns: unset; overflow-x: auto; scroll-snap-type: x mandatory;
+    gap: 18px; margin: 0 -20px; padding: 4px 20px 10px; scroll-padding: 0 20px;
+  }
+  .showcase-support-item { flex: 0 0 78%; scroll-snap-align: center; }
+  .showcase-support-item .phone-frame { --pw: min(230px, 62vw); }
+  .showcase-feature-frame { --pw: min(260px, 72vw); }
+}
+/* object-fit:contain (scoped to this section only — Hero/product-row
+   phone mockups elsewhere keep object-fit:cover) so every screenshot's
+   full, real pixels are always visible, never cropped to fill the frame;
+   any small letterbox gap blends into the screenshot's own light
+   background since .phone-screen already shares that surface color. */
+#showcase .screenshot-img { object-fit: contain; }
+/* Dezente Hover-Bewegung nur auf Geräten mit Maus/Trackpad (hover:hover),
+   damit auf Touch nichts "hängen" bleibt; prefers-reduced-motion
+   deaktiviert sie ganz. */
+#showcase .phone-frame { transition: transform 0.3s var(--ease); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  #showcase .showcase-feature:hover .phone-frame,
+  #showcase .showcase-support-item:hover .phone-frame { transform: translateY(-6px); }
+}
+/* Captions read as a caption, not a second headline (previous version
+   competed with the screenshot for attention) — smaller, lighter, and the
+   feature's own caption is only a touch larger than the support items'. */
+.showcase-caption { text-align: center; margin: 16px 0 0; display: grid; gap: 3px; }
+.showcase-caption strong { font-family: var(--font-display); font-weight: 700; color: var(--text); }
+.showcase-caption span { color: var(--text-faint); }
+.showcase-feature .showcase-caption strong { font-size: 15.5px; }
+.showcase-feature .showcase-caption span { font-size: 13.5px; }
+.showcase-support-item .showcase-caption strong { font-size: 13.5px; }
+.showcase-support-item .showcase-caption span { font-size: 12px; }
 
 /* ---------- Stat strip ---------- */
 .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }

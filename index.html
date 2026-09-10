@@ -366,63 +366,75 @@
   </section>
 
   <!-- ===================== SHOWCASE ===================== -->
+  <!-- Product-showcase pass (Sept 2026): one large "featured" screenshot
+       (Markets — the app's own entry point) plus four supporting screens in
+       a wrapping grid, never a fixed-width horizontal-scroll row. That row
+       was the actual bug behind "MIA cut off at the right edge" — five
+       220px items in a flex strip add up to wider than the section, so the
+       last one silently needed a manual scroll to see in full. A wrapping
+       grid can't do that: every item always has a full, uncropped column
+       of its own. object-fit:contain (see CSS) replaces cover so no
+       screenshot pixel is ever cropped, only letterboxed if its aspect
+       ratio doesn't exactly match the phone frame. -->
   <section class="section-alt" id="showcase">
     <div class="wrap">
       <div class="section-head center reveal">
         <div class="eyebrow"><span class="dot"></span><span data-lang="en">App Showcase</span><span data-lang="de">App-Übersicht</span></div>
         <h2><span data-lang="en">MoneyLive in action</span><span data-lang="de">MoneyLive in Aktion</span></h2>
-        <p style="margin:0 auto;"><span data-lang="en">Explore Markets, paper trading, Learning and more.</span><span data-lang="de">Entdecke Märkte, Paper Trading, Lernen und mehr.</span></p>
+        <p style="margin:0 auto;"><span data-lang="en">Explore the app's key features, directly in the product.</span><span data-lang="de">Entdecke die wichtigsten Funktionen direkt in der App.</span></p>
       </div>
-      <div class="showcase-strip reveal" data-delay="1">
-        <div class="showcase-item">
-          <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen">
-            <img class="screenshot-img" src="/assets/screenshots/markets.png" alt="MoneyLive Markets screen: live stocks, crypto, forex and commodities with search, favorites and top movers" loading="lazy" onload="this.nextElementSibling.style.display='none';" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="screenshot-placeholder" style="display:flex;"><div class="ph-bar w60"></div><div class="ph-bar w40"></div><div class="ph-block"><div class="ph-label">markets.png</div></div></div>
-          </div></div>
-          <p class="showcase-caption">
+
+      <div class="showcase-pro">
+        <figure class="showcase-feature reveal" data-delay="1">
+          <div class="phone-frame showcase-feature-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img class="screenshot-img" src="/assets/screenshots/markets.png" alt="MoneyLive Markets screen: live stocks, crypto, forex and commodities with search, favorites and top movers" loading="lazy">
+            </div>
+          </div>
+          <figcaption class="showcase-caption">
             <strong data-lang="en">All markets, at a glance</strong><strong data-lang="de">Alle Märkte auf einen Blick</strong>
-            <span data-lang="en">Stocks, ETFs, crypto, forex, indices and commodities.</span><span data-lang="de">Aktien, ETFs, Krypto, Forex, Indizes und Rohstoffe.</span>
-          </p>
-        </div>
-        <div class="showcase-item">
-          <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen">
-            <img class="screenshot-img" src="/assets/screenshots/trading.png" alt="MoneyLive Trading screen: paper-trading account overview with cash, margin and an open BTC position" loading="lazy" onload="this.nextElementSibling.style.display='none';" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="screenshot-placeholder" style="display:flex;"><div class="ph-bar w60"></div><div class="ph-bar w40"></div><div class="ph-block"><div class="ph-label">trading.png</div></div></div>
-          </div></div>
-          <p class="showcase-caption">
-            <strong data-lang="en">Paper trading, without real risk</strong><strong data-lang="de">Paper Trading ohne echtes Risiko</strong>
-            <span data-lang="en">Practice strategies with virtual capital.</span><span data-lang="de">Teste Strategien mit virtuellem Kapital.</span>
-          </p>
-        </div>
-        <div class="showcase-item">
-          <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen">
-            <img class="screenshot-img" src="/assets/screenshots/converter.png" alt="MoneyLive currency converter screen converting 100 EUR to USD with a live exchange rate" loading="lazy" onload="this.nextElementSibling.style.display='none';" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="screenshot-placeholder" style="display:flex;"><div class="ph-bar w60"></div><div class="ph-bar w40"></div><div class="ph-block"><div class="ph-label">converter.png</div></div></div>
-          </div></div>
-          <p class="showcase-caption">
-            <strong data-lang="en">Convert currencies fast</strong><strong data-lang="de">Währungen schnell umrechnen</strong>
-            <span data-lang="en">Current exchange rates, clearly laid out.</span><span data-lang="de">Aktuelle Wechselkurse übersichtlich dargestellt.</span>
-          </p>
-        </div>
-        <div class="showcase-item">
-          <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen">
-            <img class="screenshot-img" src="/assets/screenshots/learning.png" alt="MoneyLive Learning &amp; Help screen with glossary categories for basics, trading, markets and more" loading="lazy" onload="this.nextElementSibling.style.display='none';" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="screenshot-placeholder" style="display:flex;"><div class="ph-bar w60"></div><div class="ph-bar w40"></div><div class="ph-block"><div class="ph-label">learning.png</div></div></div>
-          </div></div>
-          <p class="showcase-caption">
-            <strong data-lang="en">Financial knowledge, plainly explained</strong><strong data-lang="de">Finanzwissen verständlich erklärt</strong>
-            <span data-lang="en">Learn trading, markets, charts and more.</span><span data-lang="de">Lerne Trading, Märkte, Charts und mehr.</span>
-          </p>
-        </div>
-        <div class="showcase-item">
-          <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen">
-            <img class="screenshot-img" src="/assets/screenshots/mia.png" alt="MIA, MoneyLive's in-app chat assistant, offering to explain Bitcoin, AAPL, your portfolio and leverage" loading="lazy" onload="this.nextElementSibling.style.display='none';" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="screenshot-placeholder" style="display:flex;"><div class="ph-bar w60"></div><div class="ph-bar w40"></div><div class="ph-block"><div class="ph-label">mia.png</div></div></div>
-          </div></div>
-          <p class="showcase-caption">
-            <strong data-lang="en">MIA, your smart finance assistant</strong><strong data-lang="de">MIA, dein smarter Finanzassistent</strong>
-            <span data-lang="en">Explains markets, charts and your portfolio.</span><span data-lang="de">Erklärt dir Märkte, Charts und dein Portfolio.</span>
-          </p>
+            <span data-lang="en">Stocks, ETFs, crypto, forex and more.</span><span data-lang="de">Aktien, ETFs, Krypto, Forex und mehr.</span>
+          </figcaption>
+        </figure>
+
+        <div class="showcase-support-grid reveal" data-delay="2">
+          <figure class="showcase-support-item">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen">
+              <img class="screenshot-img" src="/assets/screenshots/trading.png" alt="MoneyLive Trading screen: paper-trading account overview with cash, margin and an open BTC position" loading="lazy">
+            </div></div>
+            <figcaption class="showcase-caption">
+              <strong data-lang="en">Paper trading, without real risk</strong><strong data-lang="de">Paper Trading ohne echtes Risiko</strong>
+              <span data-lang="en">Practice strategies with virtual capital.</span><span data-lang="de">Teste Strategien mit virtuellem Kapital.</span>
+            </figcaption>
+          </figure>
+          <figure class="showcase-support-item">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen">
+              <img class="screenshot-img" src="/assets/screenshots/converter.png" alt="MoneyLive currency converter screen converting 100 EUR to USD with a live exchange rate" loading="lazy">
+            </div></div>
+            <figcaption class="showcase-caption">
+              <strong data-lang="en">Convert currencies fast</strong><strong data-lang="de">Währungen schnell umrechnen</strong>
+              <span data-lang="en">Current exchange rates, clearly laid out.</span><span data-lang="de">Aktuelle Wechselkurse übersichtlich dargestellt.</span>
+            </figcaption>
+          </figure>
+          <figure class="showcase-support-item">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen">
+              <img class="screenshot-img" src="/assets/screenshots/learning.png" alt="MoneyLive Learning &amp; Help screen with glossary categories for basics, trading, markets and more" loading="lazy">
+            </div></div>
+            <figcaption class="showcase-caption">
+              <strong data-lang="en">Financial knowledge, plainly explained</strong><strong data-lang="de">Finanzwissen verständlich erklärt</strong>
+              <span data-lang="en">Learn trading, markets, charts and more.</span><span data-lang="de">Lerne Trading, Märkte, Charts und mehr.</span>
+            </figcaption>
+          </figure>
+          <figure class="showcase-support-item">
+            <div class="phone-frame"><div class="phone-notch"></div><div class="phone-screen">
+              <img class="screenshot-img" src="/assets/screenshots/mia.png" alt="MIA, MoneyLive's in-app chat assistant, offering to explain Bitcoin, AAPL, your portfolio and leverage" loading="lazy">
+            </div></div>
+            <figcaption class="showcase-caption">
+              <strong data-lang="en">MIA, your finance assistant</strong><strong data-lang="de">MIA, dein Finanzassistent</strong>
+              <span data-lang="en">Plain-language answers about markets and trading.</span><span data-lang="de">Verständliche Antworten rund um Märkte und Trading.</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </div>
