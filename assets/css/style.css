@@ -216,7 +216,9 @@ p { margin: 0; color: var(--text-muted); }
   .nav-links { position: fixed; inset: 72px 0 0 0; background: var(--bg); flex-direction: column; align-items: stretch; padding: 12px 20px 28px; gap: 4px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 0.25s var(--ease), transform 0.25s var(--ease); overflow-y: auto; }
   .nav-links a { padding: 14px 16px; font-size: 16px; }
   body.nav-open .nav-links { transform: translateY(0); opacity: 1; pointer-events: auto; }
-  .nav-toggle { display: flex; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); }
+  /* Mobile touch-UX audit (Sept 2026): 40x40 sits just under the ~44x44
+     minimum comfortable touch target — bumped to close that gap. */
+  .nav-toggle { display: flex; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); }
   .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after { content: ''; display: block; width: 18px; height: 2px; background: var(--text); border-radius: 2px; position: relative; transition: transform 0.25s var(--ease), opacity 0.25s var(--ease); }
   .nav-toggle span::before { position: absolute; top: -6px; }
   .nav-toggle span::after { position: absolute; top: 6px; }
@@ -244,6 +246,17 @@ section { padding: 108px 0; position: relative; }
 .section-head h2 { font-size: clamp(30px, 4vw, 42px); margin-bottom: 16px; }
 .section-head p { font-size: 17px; max-width: var(--measure); }
 .section-alt { background: var(--surface-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+/* Mobile audit (Sept 2026): 108px of vertical padding per section (216px
+   between two adjacent sections) was a desktop-scaled rhythm carried
+   straight onto phones, reading as excessive empty space when stacked
+   sections already run the full viewport width. Values below are a tighter
+   phone-appropriate rhythm, not a redesign — same section order/content,
+   same desktop values above 768px. */
+@media (max-width: 768px) {
+  section { padding: 64px 0; }
+  .section-head { margin-bottom: 36px; }
+  .hero { padding: 40px 0 56px; }
+}
 
 .product-row {
   display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
@@ -288,9 +301,18 @@ section { padding: 108px 0; position: relative; }
   position: relative; width: 100%; height: 100%; border-radius: 34px; overflow: hidden;
   background: var(--surface);
 }
-.phone-screen img.screenshot-img { width: 100%; height: 100%; object-fit: cover; }
+/* Bugfix (Sept 2026 screenshot integration): .screenshot-placeholder below
+   is position:absolute — in CSS stacking, a positioned element always
+   paints above a static one in the same context regardless of source
+   order, so without this the placeholder silently covered every real,
+   successfully-loaded screenshot (the JS onload/onerror pair only ever
+   toggled `display`, never fixed the underlying paint order). Positioning
+   the real image too and giving it a higher z-index makes correct stacking
+   a CSS guarantee, not something that depends on a load-event handler
+   firing at the right time. */
+.phone-screen img.screenshot-img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; }
 .screenshot-placeholder {
-  position: absolute; inset: 0; display: flex; flex-direction: column;
+  position: absolute; inset: 0; z-index: 0; display: flex; flex-direction: column;
   background: linear-gradient(165deg, var(--surface-2), var(--surface));
   padding: 20px 16px 16px;
 }
@@ -350,7 +372,16 @@ section { padding: 108px 0; position: relative; }
 .float-card.up .fc-value { color: var(--up); }
 .float-1 { top: 8%; left: -6%; }
 .float-2 { bottom: 12%; right: -8%; }
-@media (max-width: 640px) { .float-card { display: none; } }
+/* Mobile audit (Sept 2026): floats are positioned relative to the
+   side-by-side hero layout (flanking the phone mockup) — once hero-grid
+   itself stacks to one column below 980px (see @media (max-width: 980px)
+   above), hero-visual becomes much wider than the phone mockup it contains,
+   so a float's -6%/-8% offset can push it past .hero's own left/right edge
+   and get silently clipped by .hero's overflow:hidden instead of just
+   floating beside the phone as intended. Matching this breakpoint to the
+   grid's own stacking point (was 640px) removes that clipped-badge glitch
+   at tablet widths like 768px, not just small phones. */
+@media (max-width: 980px) { .float-card { display: none; } }
 
 /* ---------- What-is grid ---------- */
 .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -371,8 +402,15 @@ section { padding: 108px 0; position: relative; }
 .showcase-strip::-webkit-scrollbar { height: 8px; }
 .showcase-strip::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 .showcase-item { scroll-snap-align: start; flex: none; width: 220px; }
-.showcase-item .phone-frame { --pw: 220px; }
-.showcase-item .showcase-caption { text-align: center; margin-top: 14px; font-size: 13.5px; font-weight: 600; color: var(--text-muted); }
+.showcase-item .phone-frame { --pw: 220px; transition: transform 0.3s var(--ease); }
+/* "MoneyLive in action" showcase (Sept 2026): real screenshots, dezente
+   Hover-Bewegung nur auf Geräten mit Maus/Trackpad (hover:hover), damit auf
+   Touch nichts "hängen" bleibt; prefers-reduced-motion deaktiviert sie ganz. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .showcase-item:hover .phone-frame { transform: translateY(-6px); }
+}
+.showcase-item .showcase-caption { text-align: center; margin-top: 14px; font-size: 13.5px; color: var(--text-muted); display: grid; gap: 4px; }
+.showcase-item .showcase-caption strong { font-family: var(--font-display); font-size: 14.5px; font-weight: 700; color: var(--text); }
 .showcase-item:nth-child(even) { margin-top: 34px; }
 
 /* ---------- Stat strip ---------- */
@@ -421,6 +459,12 @@ footer.site-footer { background: var(--surface-2); border-top: 1px solid var(--b
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; padding-top: 28px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-faint); }
 .lang-switch { display: flex; gap: 6px; }
 .lang-switch button { font-family: var(--font-mono); font-size: 12px; padding: 5px 10px; border-radius: var(--radius-pill); border: 1px solid var(--border); background: var(--surface); cursor: pointer; color: var(--text-muted); }
+/* Mobile touch-UX audit (Sept 2026): 5px/10px padding at 12px font renders
+   well under a comfortable tap target on a touch screen — desktop (mouse)
+   keeps the compact pill above, mobile gets a taller tap area. */
+@media (max-width: 768px) {
+  .lang-switch button { padding: 10px 14px; font-size: 13px; }
+}
 .lang-switch button.active { color: var(--accent-contrast); background: var(--accent); border-color: var(--accent); }
 
 /* =========================================================================
@@ -432,6 +476,7 @@ footer.site-footer { background: var(--surface-2); border-top: 1px solid var(--b
 .legal-updated { margin-top: 14px; font-family: var(--font-mono); font-size: 13px; color: var(--text-faint); }
 .legal-layout { display: grid; grid-template-columns: 240px 1fr; gap: 56px; padding: 56px 0 100px; align-items: start; }
 @media (max-width: 900px) { .legal-layout { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .legal-layout { padding: 32px 0 64px; gap: 32px; } }
 .legal-toc { position: sticky; top: 96px; }
 .legal-toc h5 { font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-faint); margin-bottom: 14px; }
 .legal-toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; counter-reset: toc; }

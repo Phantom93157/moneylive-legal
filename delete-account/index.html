@@ -6,8 +6,16 @@
 <title>Delete Your MoneyLive Account</title>
 <meta name="description" content="Permanently delete your MoneyLive account and data from the web, without needing the app installed.">
 <link rel="canonical" href="https://moneylive-legal.pages.dev/delete-account/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Delete Your MoneyLive Account">
+<meta property="og:description" content="Permanently delete your MoneyLive account and data from the web, without needing the app installed.">
+<meta property="og:url" content="https://moneylive-legal.pages.dev/delete-account/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Delete Your MoneyLive Account">
+<meta name="twitter:description" content="Permanently delete your MoneyLive account and data from the web, without needing the app installed.">
 <meta name="theme-color" content="#0e9f6e">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e9f6e'/%3E%3Cpath d='M6 18h4l3-9 5 16 3-11 2 4h5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/css/style.css">
 <script>(function(){try{var s=localStorage.getItem('ml-lang');var l=s||(navigator.language||'en').slice(0,2);document.documentElement.lang=(l==='de')?'de':'en';}catch(e){}})();</script>
 </head>
@@ -82,6 +90,11 @@
       <!-- Live form / configuration-gated -->
       <div class="delete-panel reveal" data-delay="1" id="deleteFormPanel">
         <h2 style="font-size:19px;margin-bottom:6px;"><span data-lang="en">Request deletion</span><span data-lang="de">Löschung anfragen</span></h2>
+        <p class="notice-line" style="margin-top:10px;max-width:none;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4 2 20h20L12 4Z" stroke-linejoin="round"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>
+          <span data-lang="en">This form is for accounts created with an email and password. If you signed up with Google, you don't have a MoneyLive password to enter here — please delete your account from inside the app instead (Profile → Delete Account), or use the email option below.</span>
+          <span data-lang="de">Dieses Formular ist für Konten gedacht, die mit E-Mail und Passwort erstellt wurden. Wenn du dich mit Google angemeldet hast, hast du kein MoneyLive-Passwort, das du hier eingeben könntest — lösche dein Konto in diesem Fall bitte direkt in der App (Profil → Konto löschen), oder nutze die E-Mail-Option unten.</span>
+        </p>
 
         <div id="notConfigured">
           <p class="notice-line" style="margin-top:14px;max-width:none;">
